@@ -1,0 +1,4 @@
+---
+hcloud_location: hel1
+hcloud_volume_delete_protection: false
+hcloud_volume_state: present

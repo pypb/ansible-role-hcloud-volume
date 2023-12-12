@@ -1,0 +1,14 @@
+---
+argument_specs:
+  main:
+    options:
+      hcloud_api_token:
+        type: "str"
+        required: true
+      hcloud_volume_name:
+        type: "str"
+        required: true
+      hcloud_volume_size:
+        type: "int"
+        required: true
+        description: "Size in GB"

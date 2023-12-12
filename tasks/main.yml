@@ -1,0 +1,37 @@
+---
+- name: "Creating Hetzner Cloud volume"
+  hetzner.hcloud.volume:
+    api_token: "{{ hcloud_api_token }}"
+    name: "{{ hcloud_volume_name }}"
+    delete_protection: "{{ hcloud_volume_delete_protection }}"
+    format: "{{ hcloud_volume_format | default(omit) }}"
+    location: "{{ hcloud_location }}"
+    size: "{{ hcloud_volume_size }}"
+    state: present
+  delegate_to: localhost
+  when:
+    - hcloud_volume_state == 'present'
+    - hcloud_volume_server is undefined
+
+- name: "Creating Hetzner Cloud volume"
+  hetzner.hcloud.volume:
+    api_token: "{{ hcloud_api_token }}"
+    name: "{{ hcloud_volume_name }}"
+    automount: "{{ hcloud_volume_automount | default(omit) }}"
+    delete_protection: "{{ hcloud_volume_delete_protection }}"
+    format: "{{ hcloud_volume_format | default(omit) }}"
+    server: "{{ hcloud_volume_server }}"
+    size: "{{ hcloud_volume_size }}"
+    state: present
+  delegate_to: localhost
+  when:
+    - hcloud_volume_state == 'present'
+    - hcloud_volume_server is defined
+
+- name: "Deleting Hetzner Cloud volume"
+  hetzner.hcloud.volume:
+    api_token: "{{ hcloud_api_token }}"
+    name: "{{ hcloud_volume_name }}"
+    state: absent
+  delegate_to: localhost
+  when: hcloud_volume_state == 'absent'
